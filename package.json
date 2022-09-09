@@ -1,7 +1,6 @@
 {
   "name": "hoxton-node-many-to-many",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +15,14 @@
     "better-sqlite3": "^7.6.2",
     "cors": "^2.8.5",
     "express": "^4.18.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evagjini/hoxton-node-many-to-many.git"
+  },
+  "bugs": {
+    "url": "https://github.com/evagjini/hoxton-node-many-to-many/issues"
+  },
+  "homepage": "https://github.com/evagjini/hoxton-node-many-to-many#readme",
+  "description": ""
 }
