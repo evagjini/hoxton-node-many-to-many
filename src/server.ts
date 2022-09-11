@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const port = 5167;
+const port = 5556;
 
 //  Applicants
 
@@ -53,7 +53,7 @@ const getALLInterviews = db.prepare(`
 SELECT * FROM interviews`);
 
 const getInterviewsById = db.prepare(`
-SELECT * FROM interviews WHERE id =@id`);
+SELECT * FROM interviews WHERE id = @id`);
 
 const createNewInterview = db.prepare(`
 INSERT INTO interviews (applicantsId, interviewersId, date,score) VALUES (@applicantsId, @interviewersId, @date, @score)`);
@@ -163,16 +163,13 @@ app.get("/interviews", (req, res) => {
 });
 
 app.get("/interviews/:id", (req, res) => {
-  const interview = getInterviewsById.get(req.params);
+    
+  const interview = getInterviewsById.get(req.params)
  
   if (interview) {
 
-    interview.applicant = getApplicantById.get({
-      applicantsId: interview.applicantsId
-    });
-    interview.interviewer = getInterviewerById.get({
-      interviewersId: interview.interviewersId
-    });
+    interview.applicant = getApplicantById.get({ applicantsId: interview.applicantsId});
+    interview.interviewer = getInterviewerById.get({interviewersId: interview.interviewersId});
     res.send(interview);
   } else {
     res.status(404).send("Interview not Found!");
@@ -188,8 +185,8 @@ app.post("/interviews", (req, res) => {
   if (typeof req.body.interviewersId !== "number") {
     errors.push(" interviewersId  It is not a number!");
   }
-  if (typeof req.body.date !== "number") {
-    errors.push("  Date It is not a number!");
+  if (typeof req.body.date !== "string") {
+    errors.push("  Date It is not a string!");
   }
   if (typeof req.body.score !== "number") {
     errors.push("  Score It is not a number!");
